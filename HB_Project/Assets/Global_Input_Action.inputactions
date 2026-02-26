@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Camera",
+                    "name": "Look",
                     "type": "Value",
                     "id": "ce5e971b-41fe-4a05-a7cc-9529edf757b3",
                     "expectedControlType": "Vector2",
@@ -82,6 +82,15 @@
                     "name": "LockOn",
                     "type": "Button",
                     "id": "45c885bd-259d-4e3b-9122-c8fa38e18457",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SlowWalk",
+                    "type": "Button",
+                    "id": "c630a360-ce5f-4a60-849a-9a9c5dd0c1c2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -228,7 +237,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";GamePad",
-                    "action": "Camera",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -239,7 +248,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Camera",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -328,6 +337,17 @@
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e86d3e81-8f4c-4cd4-99a1-a6dfd8f169f8",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "SlowWalk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
