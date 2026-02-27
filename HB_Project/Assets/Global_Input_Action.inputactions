@@ -34,18 +34,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LightAttack",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "8fbf8cbc-401e-466e-8f6a-411c938beeb3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "HeavyAttack",
-                    "type": "Button",
-                    "id": "662e98a7-9516-4e6c-b65c-81ec0bfb58ee",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -70,15 +61,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "5d9db256-84bb-480a-a0ac-1d623085359c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LockOn",
                     "type": "Button",
                     "id": "45c885bd-259d-4e3b-9122-c8fa38e18457",
@@ -91,6 +73,15 @@
                     "name": "SlowWalk",
                     "type": "Button",
                     "id": "c630a360-ce5f-4a60-849a-9a9c5dd0c1c2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "b88f4ee7-3ceb-4bd6-b4e0-30924885abea",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -193,7 +184,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse;GamePad",
-                    "action": "LightAttack",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -204,29 +195,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "LightAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "61fdd2be-b853-4c64-a419-afbd4931433e",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";GamePad",
-                    "action": "HeavyAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "595eb155-38bd-4929-b03d-4dd79d4258ee",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "HeavyAttack",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -298,28 +267,6 @@
                 },
                 {
                     "name": "",
-                    "id": "1b228e10-b56f-4836-9d93-d96504d31e7f",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";GamePad",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1bac1e7e-c9a4-4fe0-ae5b-f46c627cc3c1",
-                    "path": "<Keyboard>/ctrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "14741529-50ba-4727-9b86-b31b681c967b",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
@@ -348,6 +295,28 @@
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
                     "action": "SlowWalk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34883219-db49-41c9-bfe7-4f37e067beed",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d8b9559-74ac-44d3-8754-f1c7ab09c1fe",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
