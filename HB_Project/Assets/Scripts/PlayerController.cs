@@ -1,100 +1,139 @@
-using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("이동 속도")]
-    private float rotateSpeed = 10f;
-    private float _walkSpeed = 1.0f;
+    [Header("움직임 속도")]
+    public float speed = 5f;
 
-    [Header("구르기 달리기")]
-    private float _pressTime = 0.2f;
-    private float _pressButtonTimer = 0f;
-    private bool _isDodgeButtonPressed = false;
+    public float jumpHeight = 0.5f;
 
-
-    private Vector2 _moveInput;
-    private bool _isRunning;
-    private bool _isSlowWalking;
-    private Vector3 _velocity;
-
+    [Header("바닥 체크")]
+    public float groundCheckDistance = 0.2f;
+    public LayerMask groundLayer;  
 
     private CharacterController _controller;
+    private Vector2 _moveInput;
+    private Vector3 _velocity;
+    
     private Animator _animator;
 
-    private void Awake()
+    private bool _jumpInput;
+
+
+    private InputAction _moveAction;
+    private InputAction _jumpAction;
+    private InputAction _attackAction;
+
+    void Awake()
     {
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _moveAction = InputSystem.actions["Move"];
+        _jumpAction = InputSystem.actions["Jump"];
+        _attackAction = InputSystem.actions["Attack"];
+        
+
     }
 
-    private void OnMove(InputValue value)
+    void OnEnable()
     {
-        _moveInput = value.Get<Vector2>();
+        _moveAction.performed += OnMove;
+        _moveAction.canceled += MoveCancel;
+        _jumpAction.started += Onjump;
+        _jumpAction.canceled += OnJumpCanceled;
+        _attackAction.started += OnAttack;        
     }
 
-    private void OnSlowWalk(InputValue value)
+    void OnDisable()
     {
-        _isSlowWalking = value.isPressed;
+        _moveAction.performed -= OnMove;
+        _moveAction.canceled -= MoveCancel;
+        _jumpAction.started -= Onjump; 
+        _jumpAction.canceled -= OnJumpCanceled;
+        _attackAction.started -= OnAttack;
     }
 
-    private void OnDodgeSprint(InputValue value)
+    void Update()
     {
-        if (value.isPressed)
+        Debug.Log(_moveInput);
+        Debug.Log($"move enabled: {_moveAction.enabled}");
+        Debug.Log($"moveInput:{_moveInput} pos:{transform.position}");
+        bool grounded = IsGrounded();
+
+        if (grounded)
         {
-            // 초기화
-            _isDodgeButtonPressed = true;
-            _pressButtonTimer = 0f;
+            _velocity.y = -2f;
         }
-        else
+
+        if(_jumpInput && grounded)
         {
-            _isDodgeButtonPressed = false;
-            // 눌렀다 때는 시간이 0.2초 보다 빠르면 구르기
-            if (_pressButtonTimer < _pressTime)
-            {
-                Dodge();
-            }
-            _isRunning = false;
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            _jumpInput = false;
         }
+        _velocity.y += Physics.gravity.y * Time.deltaTime;
+        _controller.Move(_velocity * Time.deltaTime);
+      
+        
+        Vector3 move = transform.right * _moveInput.x + transform.forward * _moveInput.y;
+        _controller.Move(move * speed * Time.deltaTime);   
+
+
+        if (_animator == null) return;
+
+        float inputX = Mathf.Abs(_moveInput.x) < 0.1f ? 0f : _moveInput.x;
+        float inputZ = Mathf.Abs(_moveInput.y) < 0.1f ? 0f : _moveInput.y;
+        
+        _animator.SetFloat("InputX", inputX, 0.1f, Time.deltaTime);
+        _animator.SetFloat("InputZ", inputZ, 0.1f, Time.deltaTime);
+
+        _animator.SetFloat("MoveSpeed", _moveInput.magnitude);
+        
     }
 
-    private void Update()
+    bool IsGrounded()
     {
-        CheckPressButtonTimer();
-        PlayerMove();
-        Gravity();
+        if(_controller.isGrounded) return true;
+
+        Vector3 ray = transform.position + Vector3.up * 0.1f;
+
+        if (Physics.Raycast(ray, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer)) return true;
+
+        return false;
     }
 
-    private void CheckPressButtonTimer()
+    public void OnMove(InputAction.CallbackContext ctx)
     {
-        if (_isDodgeButtonPressed)
+        _moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    public void MoveCancel(InputAction.CallbackContext ctx)
+    {
+        _moveInput = Vector2.zero;
+    }
+
+    public void Onjump(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
         {
-            _pressButtonTimer += Time.deltaTime;
+            _jumpInput = true;
 
-            if (_pressButtonTimer >= _pressTime)
-            {
-                _isRunning = true;
-            }
+            if(_animator != null) _animator.SetTrigger("Jump");
         }
     }
 
-    private void PlayerMove()
+    public void OnJumpCanceled(InputAction.CallbackContext ctx)
+    {
+        if(_velocity.y > 0)
+        {
+            _velocity.y *= .5f;
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext ctx)
     {
         
     }
     
-    private void Dodge()
-    {
-        
-    }
-
-    private void Gravity()
-    {
-        if(_controller.isGrounded && _velocity.y < 0)
-            _velocity.y = -2f;
-
-        _velocity.y += -9.81f * Time.deltaTime;
-        _controller.Move(_velocity * Time.deltaTime);
-    }
 }
