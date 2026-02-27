@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         _moveAction.performed += OnMove;
         _moveAction.canceled += MoveCancel;
         _jumpAction.started += Onjump;
-        _jumpAction.canceled += OnJumpCanceled;
         _attackAction.started += OnAttack;        
     }
 
@@ -51,7 +50,6 @@ public class PlayerController : MonoBehaviour
         _moveAction.performed -= OnMove;
         _moveAction.canceled -= MoveCancel;
         _jumpAction.started -= Onjump; 
-        _jumpAction.canceled -= OnJumpCanceled;
         _attackAction.started -= OnAttack;
     }
 
@@ -60,25 +58,34 @@ public class PlayerController : MonoBehaviour
         Debug.Log(_moveInput);
         Debug.Log($"move enabled: {_moveAction.enabled}");
         Debug.Log($"moveInput:{_moveInput} pos:{transform.position}");
+
         bool grounded = IsGrounded();
 
+        // 플레이어가 땅에 있을 때 고정
         if (grounded)
         {
             _velocity.y = -2f;
         }
 
+        // 땅에 있는 채로 점프키를 누르면 점프
         if(_jumpInput && grounded)
         {
             _velocity.y = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
             _jumpInput = false;
         }
-        _velocity.y += Physics.gravity.y * Time.deltaTime;
-        _controller.Move(_velocity * Time.deltaTime);
-      
         
+        // 점프 후 내려올 때 체공시간을 짧게 하기 위해 중력을 배로 늘림
+        float gravityMultiplier = 1.0f;
+        if (_velocity.y < 0)
+        {
+            gravityMultiplier = 10.0f;
+        }
+        _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        _controller.Move(_velocity * Time.deltaTime);
+
+        // 이동로직
         Vector3 move = transform.right * _moveInput.x + transform.forward * _moveInput.y;
         _controller.Move(move * speed * Time.deltaTime);   
-
 
         if (_animator == null) return;
 
@@ -120,14 +127,6 @@ public class PlayerController : MonoBehaviour
             _jumpInput = true;
 
             if(_animator != null) _animator.SetTrigger("Jump");
-        }
-    }
-
-    public void OnJumpCanceled(InputAction.CallbackContext ctx)
-    {
-        if(_velocity.y > 0)
-        {
-            _velocity.y *= .5f;
         }
     }
 
