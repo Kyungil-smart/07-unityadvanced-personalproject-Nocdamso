@@ -33,8 +33,6 @@ public class PlayerController : MonoBehaviour
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
         _attackAction = InputSystem.actions["Attack"];
-        
-
     }
 
     void OnEnable()
@@ -55,9 +53,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_moveInput);
-        Debug.Log($"move enabled: {_moveAction.enabled}");
-        Debug.Log($"moveInput:{_moveInput} pos:{transform.position}");
+        // Debug.Log(_moveInput);
+        // Debug.Log($"move enabled: {_moveAction.enabled}");
+        // Debug.Log($"moveInput:{_moveInput} pos:{transform.position}");
 
         bool grounded = IsGrounded();
 
