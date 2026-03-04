@@ -24,7 +24,7 @@ public partial class AttackAction : Action
 
         if (distance <= AttackRange.Value)
         {
-            Debug.Log("Attack");
+            Debug.Log("공격");
             return Status.Success;
         }
 

@@ -15,33 +15,66 @@ public partial class MoveToTargetAction : Action
     [SerializeReference] public BlackboardVariable<float> AttackRange;
     [SerializeReference] public BlackboardVariable<float> DetectRange;
 
+    private NavMeshAgent _agent;
+
     protected override Status OnStart()
     {
+        if (Self.Value == null || Target.Value == null)
+        {
+            Debug.Log("초기화 체크");
+            return Status.Failure;    
+        } 
+
+        _agent = Self.Value.GetComponent<NavMeshAgent>();
+
+        if(_agent == null)
+        {
+            Debug.Log("NavMeshAgent체크");
+            return Status.Failure;
+        }
+
+        Debug.Log("대상에게 이동");
+        _agent.speed = MoveSpeed.Value;
+        _agent.isStopped = false;
+
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-    float distance = Vector3.Distance(Self.Value.transform.position, Target.Value.transform.position);
 
-    if (distance <= AttackRange.Value)
-    {
-        return Status.Success;
-    }
+        if (Target.Value == null)
+        {
+            return Status.Failure;
+        }
 
-    if(distance > DetectRange.Value)
-    {
-        return Status.Failure;   
-    }
+        float distance = Vector3.Distance(Self.Value.transform.position, Target.Value.transform.position);
 
-    Self.Value.transform.position = Vector3.MoveTowards(Self.Value.transform.position, Target.Value.transform.position, MoveSpeed.Value * Time.deltaTime);
+        if (distance <= AttackRange.Value)
+        {
+            Debug.Log("공격 범위");
+            _agent.isStopped = true;
+            return Status.Success;
+        }
 
-    return Status.Running;
+        if(distance > DetectRange.Value)
+        {
+            Debug.Log("사거리 밖으로 벗어남");
+            _agent.isStopped = true;
+            return Status.Failure;   
+        }
+
+        _agent.SetDestination(Target.Value.transform.position);
+
+        return Status.Running;
     }
 
     protected override void OnEnd()
     {
-
+        if (_agent != null && _agent.isOnNavMesh)
+        {
+            _agent.isStopped = true;
+        }
     }
 }
 
