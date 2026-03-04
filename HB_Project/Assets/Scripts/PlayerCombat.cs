@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [SerializeField] private AttackSensor _weaponSensor;
+
     private PlayerController _playerController;
 
     void Awake()
@@ -15,7 +17,26 @@ public class PlayerCombat : MonoBehaviour
         // 공격 상태일 때만 타겟이나 카메라 방향으로 회전
         if (_playerController.IsAttack) 
         {
-            AttackRotation();
+            if (_playerController.IsAttack)
+            {
+                AttackRotation();
+            }
+        }
+    }
+
+    public void EnableWeaponCollision()
+    {
+        if(_weaponSensor != null)
+        {
+            _weaponSensor.EnableAttack();
+        }
+    }
+
+    public void DisableWeaponCollision()
+    {
+        if (_weaponSensor != null)
+        {
+            _weaponSensor.DisableAttack();
         }
     }
 
