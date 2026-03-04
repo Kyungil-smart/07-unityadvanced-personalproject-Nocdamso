@@ -16,8 +16,11 @@ public class BossAITest : MonoBehaviour
     public float MaxAttackDelay = 0.5f;
     private float _currentAttackCooldown;
     private float _attackTimer = 0f;
-    [Header("참조")]
-    public Transform Target;
+
+    [Header("공격 판정")]
+    [SerializeField] private AttackSensor _bossWeapon;
+
+    private Transform Target;
     private NavMeshAgent _agent;
     private Animator _animator;
 
@@ -155,6 +158,24 @@ public class BossAITest : MonoBehaviour
         if (direction != Vector3.zero)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * RotateSpeed);
+        }
+    }
+
+    public void EnableBossAttack() 
+    {
+        if (_bossWeapon != null) _bossWeapon.EnableAttack();
+    }
+
+    public void DisableBossAttack() 
+    {
+        if (_bossWeapon != null) _bossWeapon.DisableAttack();
+    }
+
+    public void SetAttackDamage(float damage)
+    {
+        if (_bossWeapon != null)
+        {
+            _bossWeapon.SetDamage(damage);
         }
     }
 
