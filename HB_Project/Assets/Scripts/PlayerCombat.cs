@@ -40,6 +40,14 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void SetAttackDamage(float damage)
+    {
+        if (_weaponSensor != null)
+        {
+            _weaponSensor.SetDamage(damage);
+        }
+    }
+
     public void OnLockOn(InputAction.CallbackContext ctx)
     {
         if (ctx.started)

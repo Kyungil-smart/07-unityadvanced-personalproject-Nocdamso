@@ -2,23 +2,42 @@ using UnityEngine;
 
 public class AttackSensor : MonoBehaviour
 {
-    [SerializeField] public float Damage = 10f;
+    [SerializeField] private float _currentDamage = 10f;
+    [SerializeField] private string _targetTag;
     private bool _canDamage = false;
 
+    public void SetDamage(float amount)
+    {
+        _currentDamage = amount;
+    }
+    
     public void EnableAttack() => _canDamage = true;
     public void DisableAttack() => _canDamage = false;
 
-    private void OnggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(!_canDamage) return;
-
-        IDamagable damagable = other.GetComponent<IDamagable>();
-
-        if (damagable != null)
+        // Debug.Log ($"{other.name}과 닿음");
+        if (!_canDamage)
         {
-            damagable.TakeDamage(Damage);
+            return;
+        } 
 
-            _canDamage = false;
+        if (!other.CompareTag(_targetTag))
+        {
+
+            return;
+        }
+
+        if (other.CompareTag(_targetTag))
+        {
+            IDamagable damagable = other.GetComponent<IDamagable>();
+            if (damagable != null)
+            {
+                Debug.Log ($"{other.name}에게 {_currentDamage}");
+                damagable.TakeDamage(_currentDamage);
+
+                _canDamage = false;
+            } 
         }
     }
 }

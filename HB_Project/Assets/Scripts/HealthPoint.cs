@@ -26,5 +26,8 @@ public class HealthPoint : MonoBehaviour, IDamagable
     void Die()
     {
         if(_animator != null) _animator.SetTrigger("Die");
+        Debug.Log($"{gameObject.name} : 쥬금");
+        
+        GetComponent<Collider>().enabled = false;
     }
 }
