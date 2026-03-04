@@ -281,7 +281,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 1136508818}
+    TrackingTarget: {fileID: 890787973}
     LookAtTarget: {fileID: 750790379}
     CustomLookAtTarget: 1
   Lens:
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
   Composition:
-    ScreenPosition: {x: 0, y: -0.24}
+    ScreenPosition: {x: 0.02918285, y: -0.06926885}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -348,7 +348,7 @@ MonoBehaviour:
   CameraDistance: 3
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0.06}
+    ScreenPosition: {x: -0.0126456, y: 0.07916385}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -372,8 +372,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981244023}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16002025, y: 0.000000011824383, z: -0.0000000019168418, w: 0.9871138}
-  m_LocalPosition: {x: -0.00000006661856, y: 2.6519506, z: -2.780699}
+  m_LocalRotation: {x: 0.04084841, y: -0.042973347, z: 0.0017584893, w: 0.9982393}
+  m_LocalPosition: {x: 0.33319265, y: 2.025427, z: -2.9498432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -601,7 +601,7 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!114 &1323317415 stripped
+--- !u!114 &1323317421 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7025506762958804368, guid: d7a85a9b1b772714d8727b0cc7f83f7b, type: 3}
   m_PrefabInstance: {fileID: 3238038187464045723}
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   PlayerCamera: {fileID: 1967440863}
   LockOnCamera: {fileID: 981244024}
-  Player: {fileID: 1323317415}
+  Player: {fileID: 1323317421}
 --- !u!4 &1873340927
 Transform:
   m_ObjectHideFlags: 0
