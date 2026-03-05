@@ -372,8 +372,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981244023}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04091771, y: -0.043000005, z: 0.0017625721, w: 0.9982353}
-  m_LocalPosition: {x: 0.3333447, y: 2.0258393, z: -2.9497533}
+  m_LocalRotation: {x: 0.04085727, y: -0.04160699, z: 0.0017028482, w: 0.9982969}
+  m_LocalPosition: {x: 0.32245407, y: 2.0254657, z: -2.9509597}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -395,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1136508817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,10 +1072,6 @@ PrefabInstance:
       propertyPath: LockOnTarget
       value: 
       objectReference: {fileID: 750790379}
-    - target: {fileID: 7778260504389813835, guid: d7a85a9b1b772714d8727b0cc7f83f7b, type: 3}
-      propertyPath: MaxHp
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 7878635352503790913, guid: d7a85a9b1b772714d8727b0cc7f83f7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

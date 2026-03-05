@@ -34,9 +34,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
+                    "name": "LightAttack",
                     "type": "Button",
                     "id": "8fbf8cbc-401e-466e-8f6a-411c938beeb3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HeavyAttack",
+                    "type": "Button",
+                    "id": "ac62cb48-f1c2-459a-a0f7-ddba9b7d385d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -64,15 +73,6 @@
                     "name": "LockOn",
                     "type": "Button",
                     "id": "45c885bd-259d-4e3b-9122-c8fa38e18457",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SlowWalk",
-                    "type": "Button",
-                    "id": "c630a360-ce5f-4a60-849a-9a9c5dd0c1c2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -180,11 +180,11 @@
                 {
                     "name": "",
                     "id": "61c68469-5142-41fc-8ea0-a3f1692e0596",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard & Mouse;GamePad",
-                    "action": "Attack",
+                    "groups": ";GamePad",
+                    "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -195,7 +195,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
-                    "action": "Attack",
+                    "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,22 +289,11 @@
                 },
                 {
                     "name": "",
-                    "id": "e86d3e81-8f4c-4cd4-99a1-a6dfd8f169f8",
-                    "path": "<Keyboard>/alt",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard & Mouse",
-                    "action": "SlowWalk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "34883219-db49-41c9-bfe7-4f37e067beed",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -315,8 +304,30 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard & Mouse",
                     "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc4cf150-8ed6-4149-99af-55b3556ba14f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";GamePad",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6514f1f1-7ea8-4e64-ad64-aad579a5bc2e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
