@@ -23,6 +23,7 @@ public class BossAITest : MonoBehaviour
     private Transform Target;
     private NavMeshAgent _agent;
     private Animator _animator;
+    private BossHealth _bossHealth;
 
     private State _currentState = State.Idle;
     private string _targetTag = "Player";
@@ -31,11 +32,15 @@ public class BossAITest : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
 
+        _bossHealth = GetComponent<BossHealth>();
+
         RandomAttackDelay();
     }
 
     void Update()
     {
+        if(_bossHealth != null && _bossHealth._currentHp <= 0) return;
+        
         if(Target == null)
         {
             DetectTarget();

@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class Items : MonoBehaviour
 {
     [Header("물약 설정")]
-    [SerializeField] private int _potionCount = 3;
     [SerializeField] private float _healAmount = 30f;
     [SerializeField] private float _moveSpeedMultiplier = 0.3f;
+    public int PotionCount = 5;
 
     private PlayerController _playerController;
     private HealthPoint _healthpoint;
@@ -28,7 +28,7 @@ public class Items : MonoBehaviour
     {
         if(IsDrinking || _playerController.IsAttack 
                       || !_playerController.IsGrounded() 
-                      || _potionCount <= 0
+                      || PotionCount <= 0
                       || (_playerMove != null && _playerMove.IsRolling))
             return;
 
@@ -38,8 +38,8 @@ public class Items : MonoBehaviour
     private void StartDrink()
     {
         IsDrinking = true;
-        _potionCount--;
-        Debug.Log($"물약 남은 개수 : {_potionCount}");
+        PotionCount--;
+        Debug.Log($"물약 남은 개수 : {PotionCount}");
 
         _animator.SetTrigger(AnimatorHash.UseItem);
     }

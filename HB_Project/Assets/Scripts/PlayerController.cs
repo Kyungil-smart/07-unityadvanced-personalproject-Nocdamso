@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
     private PlayerAnimations _playerAnimation;
+    private PlayerHealth _playerHealth;
     private Items _items;
     
     // InputAction 참조
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         _playerMove = GetComponent<PlayerMove>();
         _playerCombat = GetComponent<PlayerCombat>();
         _playerAnimation = GetComponent<PlayerAnimations>();
+        _playerHealth = GetComponent<PlayerHealth>();
         _items = GetComponent<Items>();
     }
 
@@ -114,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(_playerHealth != null && _playerHealth.IsDead) return;
+
         _isGrounded = CheckGround();
         _playerMove.MoveUpdate();
         _playerCombat.CombatUpdate();
