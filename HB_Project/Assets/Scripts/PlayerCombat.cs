@@ -7,9 +7,12 @@ public class PlayerCombat : MonoBehaviour
 
     private PlayerController _playerController;
 
+    private PlayerStamina _playerStamina;
+
     void Awake()
     {
         _playerController = GetComponent<PlayerController>();
+        _playerStamina = GetComponent<PlayerStamina>();
     }
 
     public void CombatUpdate()
@@ -58,18 +61,33 @@ public class PlayerCombat : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        // 버튼을 뗄 때가 아니라 누를 때(started)만 실행
+        // 버튼 누를 때(started)만 실행
         if (!ctx.started) return;
 
-        // 공중에 떠 있거나 이미 공격 중이라면 공격 불가 (콤보 시스템 시 IsAttack 조건은 수정 가능)
-        if (!_playerController.IsGrounded() && !_playerController.IsAttack)
+        // 공중에 떠 있다면 공격불가
+        if (!_playerController.IsGrounded() || GetComponent<Items>().IsDrinking)
         {
             return;
         }
 
-        // 애니메이터의 Attack 트리거 실행
-        if (_playerController.GetAnimator() != null) 
-            _playerController.GetAnimator().SetTrigger("Attack");
+        if (_playerStamina.CanAction(_playerStamina.AttackCost))
+        {
+            if (_playerController.GetAnimator() != null)
+            {
+                _playerController.GetAnimator().SetTrigger(AnimatorHash.Attack);
+                Debug.Log("공격 실행");                             
+            }
+        }
+
+        else
+        {
+            Debug.Log("스태미나 부족, 공격 불가");
+        }
+    }
+
+    public void AttackStaminaEvent()
+    {
+        _playerStamina.SpendStamina(_playerStamina.AttackCost);
     }
 
     void AttackRotation()
