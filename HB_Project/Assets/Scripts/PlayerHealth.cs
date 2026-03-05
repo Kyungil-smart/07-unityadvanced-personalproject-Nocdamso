@@ -20,6 +20,8 @@ public class PlayerHealth : HealthPoint
     {
         if(_currentHp <= 0 || IsInvincible) return;
 
+        if (_playerController != null) _playerController.IsAttack = false;
+
         if(_items != null) _items.OnDrinkEnd();
 
         if(_playerController != null && _playerMove.IsRolling)
@@ -38,10 +40,24 @@ public class PlayerHealth : HealthPoint
 
         base.Die();
 
-        if(GetComponent<PlayerController>() != null) GetComponent<PlayerController>().enabled = false;
+        _playerController.enabled = false;
+        _playerMove.enabled = false;
 
-        if(GetComponent<PlayerMove>() != null) GetComponent<PlayerMove>().enabled = false;
+        GameSceneManager.Instance.PlayerDied();
+    }
 
-        GetComponent<CharacterController>().enabled = false;
+    public void ResetHealth()
+    {
+        IsDead = false;
+        _currentHp = MaxHp;
+        IsInvincible = false;
+
+        if(_items != null) _items.OnDrinkEnd();
+
+        if(_animator != null)
+        {
+            _animator.Rebind();
+            _animator.Update(0f);
+        }
     }
 }
