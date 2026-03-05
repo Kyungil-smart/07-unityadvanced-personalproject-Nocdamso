@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     private PlayerController _playerController;
     private Animator _animator;
-    private HealthPoint _healthPoint;
+    private PlayerHealth _playerHealth;
     private PlayerStamina _playerStamina;
     private Items _items;
 
@@ -24,13 +24,15 @@ public class PlayerMove : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _animator = GetComponent<Animator>();
-        _healthPoint = GetComponent<HealthPoint>();
+        _playerHealth = GetComponent<PlayerHealth>();
         _playerStamina = GetComponent<PlayerStamina>();
         _items = GetComponent<Items>();
     }
 
     public void MoveUpdate()
     {
+        if (_playerHealth != null && _playerHealth.IsDead) return;
+
         if (IsRunning && _playerController.GetMoveInput().magnitude > 0.1f)
         {
             if(_playerStamina.CurrentStamina > 0)
@@ -194,7 +196,7 @@ public class PlayerMove : MonoBehaviour
         _playerStamina.SpendStamina(_playerStamina.RollCost);
 
         IsRolling = true;
-        if (_healthPoint != null) _healthPoint.IsInvincible = true;
+        if (_playerHealth != null) _playerHealth.IsInvincible = true;
         _animator.SetTrigger(AnimatorHash.Roll);
 
         Vector3 rollDir = _playerController.BaseCameraDirection();
@@ -221,13 +223,13 @@ public class PlayerMove : MonoBehaviour
 
         IsRolling = false;
 
-        if (_healthPoint != null) _healthPoint.IsInvincible = false;
+        if (_playerHealth != null) _playerHealth.IsInvincible = false;
     }
 
     public void ResetRollingState()
     {
         IsRolling = false;
 
-        if(_healthPoint != null) _healthPoint.IsInvincible = false;
+        if(_playerHealth != null) _playerHealth.IsInvincible = false;
     }
 }

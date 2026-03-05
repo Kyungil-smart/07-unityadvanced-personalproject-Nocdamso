@@ -13,7 +13,7 @@ public class PlayerStamina : MonoBehaviour
     public float AttackCost = 15f;
 
     [Header ("스태미나 회복")]
-    public float RegenRate = 20f;
+    public float RegenRate = 30f;
     public float RegenDelay = 1f;
 
     private float _regenTimer;
