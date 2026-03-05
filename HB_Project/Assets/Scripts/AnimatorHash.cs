@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class AnimatorHash
 {
+    // 애니메이터 선언해두고 꺼내 쓸 수 있게 관리
     public static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
     public static readonly int InputX = Animator.StringToHash("InputX");
     public static readonly int InputZ = Animator.StringToHash("InputZ");

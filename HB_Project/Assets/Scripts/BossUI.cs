@@ -24,13 +24,10 @@ public class BossUI : MonoBehaviour
 
     void Update()
     {
-        if(BossHealth == null || BossAI == null) return;
+        if(BossHealth == null || BossAI == null || UiParent == null) return;
 
-        if(BossHpBar != null)
-        {
-            BossHpBar.fillAmount = BossHealth._currentHp / BossHealth.MaxHp;
-        }
-
+        BossHpBar.fillAmount = BossHealth._currentHp / BossHealth.MaxHp;
+        
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
@@ -40,6 +37,10 @@ public class BossUI : MonoBehaviour
             {
                 UiParent.SetActive(true);
             }
+            else
+            {
+                UiParent.SetActive(false);
+            }
         }
 
         if(BossHealth._currentHp <= 0)
@@ -48,7 +49,7 @@ public class BossUI : MonoBehaviour
         }
     }
 
-    void HideUI()
+    public void HideUI()
     {
         if (UiParent != null) UiParent.SetActive(false);
     }

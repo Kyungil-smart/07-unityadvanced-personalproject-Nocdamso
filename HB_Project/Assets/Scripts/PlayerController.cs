@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private Transform _cameraTransform;
 
+
     // 각 컴포넌트 참조
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _cameraTransform = Camera.main.transform;
-
+        
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
         _lightAttackAction = InputSystem.actions["LightAttack"];

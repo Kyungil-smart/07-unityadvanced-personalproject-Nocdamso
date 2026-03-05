@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -31,18 +32,13 @@ public class PlayerMove : MonoBehaviour
 
     public void MoveUpdate()
     {
-        if (_playerHealth != null && _playerHealth.IsDead) return;
-
-        if (IsRunning && _playerController.GetMoveInput().magnitude > 0.1f)
+        // 죽었거나 게임오버 ESC메뉴가 열려있으면 이동로직 무시
+        if (_playerHealth.IsDead ||
+            (GameSceneManager.Instance != null && GameSceneManager.Instance.IsGameOver) ||
+            (GameSceneManager.Instance != null && GameSceneManager.Instance.IsMenuOpen))
         {
-            if(_playerStamina.CurrentStamina > 0)
-            {
-                _playerStamina.SpendStaminaPerSec(_playerStamina.RunCostPerSecond);
-            }
-            else
-            {
-                StopRunning();
-            }   
+            if(IsRunning) StopRunning();
+            return;
         }
 
         if (_isButtonDown && !IsRolling && (Time.time - _pressStartTime >= _rollThreshold))
@@ -95,13 +91,15 @@ public class PlayerMove : MonoBehaviour
     public void OnDodgeSprint(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
-        {
+        {   
+            // 처음 버튼 누른 시간 저장
             _pressStartTime = Time.time;
             _isButtonDown = true;
         } 
 
         if (ctx.performed)
         {
+            // 누른 상태가 지속되면 달림
             if (Time.time - _pressStartTime >= _rollThreshold && !IsRolling)
             {
                 IsRunning = true;
@@ -111,6 +109,7 @@ public class PlayerMove : MonoBehaviour
 
         if (ctx.canceled)
         {
+            // 버튼을 짧게 눌렀다 때면 구름
             _isButtonDown = false;
 
             if(Time.time - _pressStartTime < _rollThreshold 
@@ -198,10 +197,19 @@ public class PlayerMove : MonoBehaviour
         IsRolling = true;
         if (_playerHealth != null) _playerHealth.IsInvincible = true;
         _animator.SetTrigger(AnimatorHash.Roll);
-
+        
+        // 카메라 기준 입력 방향으로 구름
         Vector3 rollDir = _playerController.BaseCameraDirection();
 
-        if (rollDir == Vector3.zero) rollDir = transform.forward;
+        // 입력이 없다면 바라보는 방향으로 구름
+        if (rollDir == Vector3.zero) 
+        {
+            rollDir = transform.forward;            
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(rollDir);
+        }
 
         float timer = 0f;
         while (timer < _playerController.RollDuration)
