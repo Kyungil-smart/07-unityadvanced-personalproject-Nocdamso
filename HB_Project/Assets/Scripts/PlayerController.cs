@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     // InputAction 참조
     private InputAction _moveAction;
     private InputAction _jumpAction;
-    private InputAction _attackAction;
+    private InputAction _lightAttackAction;
+    private InputAction _heavyAttackAction;
     private InputAction _lockOnAction;
     private InputAction _dodgeSprintAction;
     private InputAction _useItemAction;
@@ -65,7 +66,8 @@ public class PlayerController : MonoBehaviour
 
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
-        _attackAction = InputSystem.actions["Attack"];
+        _lightAttackAction = InputSystem.actions["LightAttack"];
+        _heavyAttackAction = InputSystem.actions["HeavyAttack"];
         _lockOnAction = InputSystem.actions["LockOn"];
         _dodgeSprintAction = InputSystem.actions["DodgeSprint"];
         _useItemAction = InputSystem.actions["UseItem"];
@@ -86,7 +88,8 @@ public class PlayerController : MonoBehaviour
         _dodgeSprintAction.performed += _playerMove.OnDodgeSprint;
         _dodgeSprintAction.canceled += _playerMove.OnDodgeSprint;
 
-        _attackAction.started += _playerCombat.OnAttack;
+        _lightAttackAction.started += _playerCombat.OnLightAttack;
+        _heavyAttackAction.started += _playerCombat.OnHeavyAttack;
         _lockOnAction.started += _playerCombat.OnLockOn;
         
         _useItemAction.started += _items.OnUseItem;
@@ -102,7 +105,8 @@ public class PlayerController : MonoBehaviour
         _dodgeSprintAction.performed -= _playerMove.OnDodgeSprint;
         _dodgeSprintAction.canceled -= _playerMove.OnDodgeSprint;
 
-        _attackAction.started -= _playerCombat.OnAttack;
+        _lightAttackAction.started -= _playerCombat.OnLightAttack;
+        _heavyAttackAction.started -= _playerCombat.OnHeavyAttack;
         _lockOnAction.started -= _playerCombat.OnLockOn;
 
         _useItemAction.started -= _items.OnUseItem;
@@ -129,6 +133,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 BaseCameraDirection()
     {
+        if(_moveInput.magnitude < 0.1f) return Vector3.zero;
+
         Vector3 forward = _cameraTransform.forward;
         Vector3 right = _cameraTransform.right;
         forward.y = 0f; right.y = 0f;
