@@ -12,8 +12,8 @@ public class BossAITest : MonoBehaviour
     public float AttackRange = 2.0f;
 
     [Header("공격 딜레이")]
-    public float MinAttackDelay = 0.1f;
-    public float MaxAttackDelay = 0.5f;
+    public float MinAttackDelay = 1f;
+    public float MaxAttackDelay = 4f;
     private float _currentAttackCooldown;
     private float _attackTimer = 0f;
 
@@ -41,6 +41,8 @@ public class BossAITest : MonoBehaviour
     {
         if(_bossHealth != null && _bossHealth._currentHp <= 0) return;
         
+        _attackTimer += Time.deltaTime;
+
         if(Target == null)
         {
             DetectTarget();
@@ -86,8 +88,6 @@ public class BossAITest : MonoBehaviour
                 // 공격중 Player 바라봄
                 LookAtTarget();
 
-                _attackTimer += Time.deltaTime;
-
                 if(_attackTimer >= _currentAttackCooldown)
                 {
                     // 4가지 패턴 중 랜덤하게 공격, 공격간의 딜레이 랜덤
@@ -118,12 +118,6 @@ public class BossAITest : MonoBehaviour
         _currentState = newState;
 
         _animator.SetInteger("State", (int)newState);
-
-        if (newState == State.Attack)
-        {
-            // 추적중 첫 공격은 바로
-            _attackTimer = _currentAttackCooldown;
-        }
 
         if (newState == State.Move)
         {

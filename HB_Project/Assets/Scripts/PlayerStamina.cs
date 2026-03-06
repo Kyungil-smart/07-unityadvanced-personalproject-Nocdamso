@@ -7,10 +7,10 @@ public class PlayerStamina : MonoBehaviour
     public float CurrentStamina;
 
     [Header("소모량 설정")]
-    public float RunCostPerSecond = 10f;
-    public float RollCost = 20f;
-    public float JumpCost = 10f;
-    public float AttackCost = 15f;
+    public float RunCostPerSecond = 20f;
+    public float RollCost = 25f;
+    public float JumpCost = 5f;
+    public float AttackCost = 10f;
 
     [Header ("스태미나 회복")]
     public float RegenRate = 30f;

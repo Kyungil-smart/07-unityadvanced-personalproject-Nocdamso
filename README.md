@@ -1,1 +1,48 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=22871639&assignment_repo_type=AssignmentRepo)
+# 프로젝트 제목 및 소개
+## 게임 이름 : LABYRINTH
+
+보스를 무찌를 때까지 계속 도전해보자
+- 장르 : 소울라이크
+- 플레이 타임 : 5분
+- 개발 환경 : Unity 6000.3.9f1
+- 플랫폼 : Windows
+- 프로젝트 기간 : 2026.02.26 ~ 2026.03.06 (9일)
+
+# 게임 특징
+- 공격하고 굴러서 적의 공격을 피함
+- 동작 시 스태미너가 소모됨으로 관리하면서 플레이 요함
+
+# 플레이 방법
+- 이동 : WASD 
+    - (패드 : 왼쪽 아날로그 스틱)
+  
+- 구르기 : SpaceBar 눌렀다 떼기 
+    - (패드 : B)
+- 달리기 : SpaceBar 키 다운 
+    - (패드 : B키 다운)
+- 점프 : F 
+    - (패드 : A)
+- 약공격 : 좌클릭 
+    - (패드 : L키)
+- 강공격 : 우클릭 
+    - (패드 : R키)
+- 락온 : 마우스 휠클릭 
+    - (패드 : 오른쪽 아날로그 스틱 클릭)
+- 포션 사용 : Q 
+    - (패드 : X)
+- 카메라 움직임 : 마우스
+    - (패드 : 오른쪽 아날로그 스틱)
+
+
+# 주요 기능
+## 플레이어 조작
+- New Input System으로 유저의 입력을 받아 플레이 하도록 설계
+- Character Controller를 이용한 플레이어 움직임 및 공격, 회피 시스템
+
+## 보스 AI
+- NavMesh를 사용해 플레이어를 추적하게 함
+- State Pattern을 사용해 Player 추적, 공격범위 탐지, 공격범위 안에 있으면 공격 구현
+
+## 시스템 및 최적화
+- 싱글톤 패턴을 이용해 GameSceneManager에서 게임 진행, 승리, 패배 관리
+
