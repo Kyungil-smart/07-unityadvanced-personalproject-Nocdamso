@@ -12050,7 +12050,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -12076,8 +12076,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231571708}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07957688, y: -0.03198674, z: 0.002554827, w: 0.99631214}
-  m_LocalPosition: {x: 0.26491717, y: 6.8539453, z: -50.907433}
+  m_LocalRotation: {x: 0.05859671, y: 0, z: 0, w: 0.9982817}
+  m_LocalPosition: {x: 0, y: 6.4069996, z: -51.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21925,6 +21925,10 @@ PrefabInstance:
       propertyPath: BossNameText
       value: 
       objectReference: {fileID: 1203442904}
+    - target: {fileID: 6880441682061932672, guid: 6a2e1cccbd4a846489cfcd2c3ba75917, type: 3}
+      propertyPath: MaxAttackDelay
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8178639354719891150, guid: 6a2e1cccbd4a846489cfcd2c3ba75917, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
