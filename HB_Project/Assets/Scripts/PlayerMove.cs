@@ -219,10 +219,24 @@ public class PlayerMove : MonoBehaviour
         {
             rollDir = transform.forward;            
         }
-        else
+
+           // 입력 방향이 결정된 후, 그 방향이 보스를 '정면'으로 들이받는 상황인지 체크합니다.
+        if (_playerController.IsLockOn && _playerController.LockOnTarget != null)
         {
-            transform.rotation = Quaternion.LookRotation(rollDir);
+            Vector3 toBoss = (_playerController.LockOnTarget.position - transform.position).normalized;
+            toBoss.y = 0;
+
+            // 내 구르기 방향(rollDir)과 보스 방향(toBoss)이 거의 일치하는지 확인 (정면 전진 구르기일 때)
+            if (Vector3.Dot(rollDir.normalized, toBoss) > 0.9f) 
+            {
+                // 보스 정면일 때만 살짝 옆으로 틉니다. 
+                // 락온 중엔 내가 보스를 바라보므로 transform.right가 곧 보스의 측면 방향이 됩니다.
+                rollDir = Vector3.Slerp(rollDir, transform.right, 0.15f).normalized;
+            }
         }
+
+        // 4. 구르기 시작 시점에 실제 회전 적용 (이제 대각선, 옆, 뒤 모두 정상 회전)
+        transform.rotation = Quaternion.LookRotation(rollDir);
 
         float timer = 0f;
         while (timer < _playerController.RollDuration)
