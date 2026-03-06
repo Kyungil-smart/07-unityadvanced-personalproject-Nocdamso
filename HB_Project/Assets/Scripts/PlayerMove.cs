@@ -51,6 +51,19 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (IsRunning)
+        {
+            if(_playerController.GetMoveInput().magnitude > 0.1f)
+            {
+                _playerStamina.SpendStaminaPerSec(_playerStamina.RunCostPerSecond);
+            }
+
+            if(_playerStamina.CurrentStamina <= 0)
+            {
+                StopRunning();
+            }
+        }
+
         if (!IsRolling)
         {
             // 중력 및 이동 로직 실행

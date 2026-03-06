@@ -61,15 +61,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "ca7d1dca-9bc7-4128-b369-48b82b74e2e1",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LockOn",
                     "type": "Button",
                     "id": "45c885bd-259d-4e3b-9122-c8fa38e18457",
@@ -91,6 +82,15 @@
                     "name": "EscMenu",
                     "type": "Button",
                     "id": "1ff40706-3e58-425e-8a99-a66cf426e627",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "ca7d1dca-9bc7-4128-b369-48b82b74e2e1",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",

@@ -2,34 +2,31 @@ using UnityEngine;
 
 public class BossRoomTrigger : MonoBehaviour
 {
-    private BoxCollider _collider;
+    public GameObject DoorObject;
+    
+    private bool _isLocked = false;
 
-    void Awake()
+    private void OnTriggerEnter(Collider other)
     {
-        _collider = GetComponent<BoxCollider>();
-    }
+        Debug.Log("감지기 접촉: " + other.name);
 
-    private void OnTriggerExit(Collider other)
-    {
-        // 플레이어가 트리거를 통과했을 때
-        if (other.CompareTag("Player"))
+        if(!_isLocked && other.CompareTag("Player"))
         {
+            Debug.Log("플레이어 태그 확인됨! 문을 닫습니다.");
             LockDoor();
         }
     }
 
     public void LockDoor()
     {
-        // 트리거를 물리적인 벽으로 전환
-        _collider.isTrigger = false; 
-
-
-        Debug.Log("보스방이 봉쇄되었습니다! 이제 못 나갑니다.");
+        _isLocked = true;
+        if(DoorObject != null) DoorObject.SetActive(true);
+        Debug.Log("보스방을 봉쇄합니다.");
     }
 
     public void UnlockDoor()
     {
-        // 보스를 잡았거나 리스폰 시 다시 열어주는 함수
-        _collider.isTrigger = true;
+        _isLocked = false;
+        if(DoorObject != null) DoorObject.SetActive(false);
     }
 }

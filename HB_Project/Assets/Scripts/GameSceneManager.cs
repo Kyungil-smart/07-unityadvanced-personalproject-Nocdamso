@@ -19,6 +19,8 @@ public class GameSceneManager : MonoBehaviour
     public BossHealth Boss;
     public BossUI _bossUi;
 
+    [Header("보스방 문 설정")]
+    public BossRoomTrigger BossRoomBarrier;
 
     private PlayerInput _playerInput;
 
@@ -111,9 +113,10 @@ public class GameSceneManager : MonoBehaviour
                 {
                     _bossUi.HideUI();
                 }
-                else
+
+                if ( BossRoomBarrier != null)
                 {
-                    if(_bossUi != null) _bossUi.HideUI();
+                    BossRoomBarrier.UnlockDoor();
                 }
             }
 
